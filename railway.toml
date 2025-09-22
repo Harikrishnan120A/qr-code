@@ -1,0 +1,22 @@
+# Railway Deployment Configuration
+# https://railway.app
+
+# This file configures the Railway deployment
+# Railway will automatically detect Node.js and run the build
+
+PORT=4000
+NODE_ENV=production
+
+# Build settings for Railway
+[build]
+  command = "cd lab-login-app/server && npm ci && npx prisma generate && npm run build && cd ../client && npm ci && npm run build"
+
+[deploy]
+  startCommand = "cd lab-login-app/server && npm start"
+  healthcheckPath = "/health"
+  healthcheckTimeout = 30
+
+# Environment variables to set in Railway dashboard:
+# ADMIN_SECRET=your-secure-secret-here
+# DATABASE_URL=file:./prisma/railway.db
+# HOST=${{RAILWAY_STATIC_URL}}

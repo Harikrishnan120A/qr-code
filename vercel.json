@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "lab-login-app/server/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "lab-login-app/server/prisma/**",
+          "lab-login-app/client/dist/**"
+        ]
+      }
+    },
+    {
+      "src": "lab-login-app/client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "lab-login-app/server/dist/index.js"
+    },
+    {
+      "src": "/health",
+      "dest": "lab-login-app/server/dist/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "lab-login-app/client/dist/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000"
+  }
+}

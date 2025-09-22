@@ -1,0 +1,30 @@
+# Render Deployment Configuration
+# https://render.com
+
+services:
+  - type: web
+    name: lab-login-app
+    env: node
+    buildCommand: |
+      cd lab-login-app/server && 
+      npm ci && 
+      npx prisma generate && 
+      npm run build && 
+      cd ../client && 
+      npm ci && 
+      npm run build
+    startCommand: cd lab-login-app/server && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: ADMIN_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        value: file:./prisma/render.db
+    disk:
+      name: lab-login-data
+      mountPath: /opt/render/project/src/lab-login-app/server/prisma
+      sizeGB: 1
