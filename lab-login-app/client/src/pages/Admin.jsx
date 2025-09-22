@@ -189,7 +189,7 @@ function Admin() {
             ℹ️ Default Admin Credentials
           </h3>
           <p className="text-sm text-yellow-800">
-            For testing purposes, the default admin secret is: <code className="bg-yellow-100 px-1 rounded">admin123</code>
+            For testing purposes, the default admin secret is: <code className="bg-yellow-100 px-1 rounded">lab-admin-2023</code>
           </p>
           <p className="text-xs text-yellow-700 mt-2">
             Change this in the server's .env file for production use.
