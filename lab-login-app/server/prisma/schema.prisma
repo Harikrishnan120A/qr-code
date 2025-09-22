@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Member {
+  id         String   @id @default(cuid())
+  name       String
+  department String
+  year       String
+  qrToken    String   @unique
+  createdAt  DateTime @default(now())
+  attendance Attendance[]
+}
+
+model Attendance {
+  id        String   @id @default(cuid())
+  memberId  String
+  type      String   // "in" | "out"
+  timestamp DateTime @default(now())
+  date      String   // YYYY-MM-DD
+  Member    Member   @relation(fields: [memberId], references: [id])
+}
