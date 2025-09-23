@@ -43,9 +43,18 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      - name: Debug - List files
+        run: |
+          echo "Repository root:"
+          ls -la
+          echo "Lab login app:"
+          ls -la lab-login-app/
+          echo "Client directory:"
+          ls -la lab-login-app/client/
+
       - name: Install dependencies
         working-directory: lab-login-app/client
-        run: npm ci
+        run: npm install
 
       - name: Build frontend
         working-directory: lab-login-app/client
