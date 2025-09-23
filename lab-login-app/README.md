@@ -438,6 +438,6 @@ For issues and questions:
 ---
 
 **Created**: September 2025  
-**Version**: 1.0.0  
+**Version**: 1.0.1  
 **Tech Stack**: Node.js + Express + TypeScript + Prisma + React + Vite + Tailwind CSS  
-**Deployment**: GitHub Pages Ready
+**Deployment**: GitHub Pages Ready + Railway Backend Support
