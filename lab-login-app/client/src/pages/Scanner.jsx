@@ -74,7 +74,7 @@ function Scanner() {
     setSuccess(null);
 
     try {
-      const response = await apiClient.get(`api/scan/${token}?type=${type}`);
+      const response = await apiClient.get(`/api/scan/${token}?type=${type}`);
 
       const data = await response.json();
 
