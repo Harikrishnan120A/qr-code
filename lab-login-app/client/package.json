@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "deploy:local": "vite build && gh-pages -d dist",
+    "build:production": "NODE_ENV=production vite build",
+    "serve:local": "vite build && npx serve dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -20,7 +23,9 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.16",
+    "gh-pages": "^6.0.0",
     "postcss": "^8.4.31",
+    "serve": "^14.2.1",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
   }

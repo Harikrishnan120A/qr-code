@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { apiClient, getApiUrl } from '../utils/api';
 
 function Scanner() {
   const [scanResult, setScanResult] = useState(null);
@@ -73,9 +74,7 @@ function Scanner() {
     setSuccess(null);
 
     try {
-      const response = await fetch(`/api/scan/${token}?type=${type}`, {
-        method: 'GET'
-      });
+      const response = await apiClient.get(`api/scan/${token}?type=${type}`);
 
       const data = await response.json();
 

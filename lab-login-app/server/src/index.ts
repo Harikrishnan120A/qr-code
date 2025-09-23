@@ -11,8 +11,19 @@ import attendanceRoutes from './routes/attendance';
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  'http://localhost:5173', 
+  'http://localhost:5174', 
+  'http://localhost:3000'
+];
+
+// Add GitHub Pages origin if CLIENT_URL is provided
+if (process.env.CLIENT_URL) {
+  allowedOrigins.push(process.env.CLIENT_URL);
+}
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://localhost:3000'], // Allow Vite dev server
+  origin: allowedOrigins,
   credentials: true
 }));
 

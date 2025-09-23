@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AttendanceTable from '../components/AttendanceTable';
+import { apiClient } from '../utils/api';
 
 function Admin() {
   const [members, setMembers] = useState([]);
@@ -32,7 +33,7 @@ function Admin() {
     // Test authentication by fetching members
     try {
       setLoading(true);
-      const response = await fetch('/api/members', {
+      const response = await apiClient.get('/api/members', {
         headers: {
           'x-admin-secret': adminSecret
         }
@@ -56,7 +57,7 @@ function Admin() {
 
   const fetchMembers = async () => {
     try {
-      const response = await fetch('/api/members', {
+      const response = await apiClient.get('/api/members', {
         headers: {
           'x-admin-secret': adminSecret
         }
@@ -76,7 +77,7 @@ function Admin() {
   const fetchAttendance = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/attendance?date=${selectedDate}`);
+      const response = await apiClient.get(`/api/attendance?date=${selectedDate}`);
 
       if (!response.ok) {
         throw new Error('Failed to fetch attendance');
@@ -94,7 +95,7 @@ function Admin() {
   const handleExport = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/export?date=${selectedDate}&admin_secret=${adminSecret}`);
+      const response = await apiClient.get(`/api/export?date=${selectedDate}&admin_secret=${adminSecret}`);
 
       if (!response.ok) {
         const data = await response.json();

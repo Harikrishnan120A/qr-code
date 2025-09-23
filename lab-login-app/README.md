@@ -360,6 +360,61 @@ Year: "Graduate"
 - Use browser dev tools to inspect API requests
 - Test QR codes with phone camera apps
 
+## 🌐 GitHub Pages Deployment
+
+This project includes automated GitHub Pages deployment for the frontend using GitHub Actions.
+
+### Setup GitHub Pages Deployment
+
+1. **Enable GitHub Pages**:
+   - Go to your repository Settings → Pages
+   - Set Source to "GitHub Actions"
+
+2. **Configure Repository Secrets**:
+   - Go to Settings → Secrets and variables → Actions
+   - Add the following repository secret:
+     - `VITE_API_URL`: Your backend API URL (e.g., `https://your-backend.herokuapp.com`)
+
+3. **Deploy**:
+   ```bash
+   # Push to main branch to trigger deployment
+   git push origin main
+   ```
+
+4. **Access Your App**:
+   - Your app will be available at: `https://yourusername.github.io/your-repo-name`
+   - The GitHub Action will automatically build and deploy on every push to main
+
+### Environment Configuration
+
+The frontend automatically adapts to different environments:
+
+- **Development**: Uses `VITE_API_URL` from `.env.development` (default: `http://localhost:4000`)
+- **Production**: Uses `VITE_API_URL` from environment variables or `.env.production`
+
+### Backend Deployment Notes
+
+For a complete deployment, you'll need to deploy your backend separately:
+
+1. **Recommended platforms**: Railway, Render, Heroku, or any Node.js hosting
+2. **Environment variables needed**:
+   ```
+   NODE_ENV=production
+   HOST=your-backend-domain.com
+   CLIENT_URL=https://yourusername.github.io/your-repo-name
+   PORT=4000
+   ADMIN_SECRET=your-secure-secret
+   ```
+3. **Update frontend config**: Set `VITE_API_URL` in GitHub repository secrets
+
+### GitHub Actions Workflow
+
+The deployment uses `.github/workflows/deploy.yml` which:
+- Installs Node.js 18
+- Installs dependencies
+- Builds the project with environment variables
+- Deploys to GitHub Pages using `peaceiris/actions-gh-pages`
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.

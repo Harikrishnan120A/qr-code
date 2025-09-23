@@ -14,7 +14,9 @@ import { config } from '../config';
  */
 export async function generateQRDataURL(token: string, type: string = 'in'): Promise<string> {
   try {
-    const scanUrl = `http://${config.host}/api/scan/${token}?type=${type}`;
+    // Use HTTPS for production, HTTP for development
+    const protocol = config.nodeEnv === 'production' ? 'https' : 'http';
+    const scanUrl = `${protocol}://${config.host}/api/scan/${token}?type=${type}`;
     
     // Generate QR code as data URL with PNG format
     const qrDataURL = await QRCode.toDataURL(scanUrl, {

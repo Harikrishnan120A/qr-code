@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import QRDisplay from '../components/QRDisplay';
+import { apiClient } from '../utils/api';
 
 function Home() {
   const [formData, setFormData] = useState({
@@ -30,14 +31,7 @@ function Home() {
     setSuccess(null);
 
     try {
-      const response = await fetch('/api/members', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
+      const response = await apiClient.post('/api/members', formData);
       const data = await response.json();
 
       if (!response.ok) {
