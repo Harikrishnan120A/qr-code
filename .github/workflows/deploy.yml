@@ -60,7 +60,7 @@ jobs:
         working-directory: lab-login-app/client
         env:
           NODE_ENV: production
-          VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://your-backend.example.com' }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://lab-login-backend.onrender.com' }}
         run: npm run build
 
       - name: Upload artifact

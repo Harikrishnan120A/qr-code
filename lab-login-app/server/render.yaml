@@ -1,0 +1,18 @@
+# Render.com deployment configuration
+services:
+  - type: web
+    name: lab-login-backend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:production
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_SECRET
+        value: lab-admin-2023
+      - key: CLIENT_URL
+        value: https://harikrishnan120a.github.io/qr-code
+      - key: HOST
+        generateValue: true
+    autoDeploy: false
